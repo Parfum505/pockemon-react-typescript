@@ -1,12 +1,11 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { useSelector } from "react-redux";
+import { RootStore } from "./redux/store/store";
 
-function App() {
-  return (
-    <div className="App">
-      Pockemon
-    </div>
-  );
-}
+const App: React.FC = () => {
+  const pokemonState = useSelector((state: RootStore) => state.pokemon);
+  return <div className="App">Pockemon</div>;
+};
 
 export default App;
