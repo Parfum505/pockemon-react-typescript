@@ -1,18 +1,21 @@
 import React from "react";
 import "./App.css";
-import { useSelector } from "react-redux";
-import { RootStore } from "./redux/store/store";
-import SearchForm from "./components/searchForm/search-form";
-import PokemonDetails from "./components/pokemonDetais/pokemon-detais";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import PokemonDetails from "./components/pokemonDetails/pokemon-details";
+import PokemonList from "./components/pokemonList/pokemon-list";
 
 const App: React.FC = () => {
-  const pokemonState = useSelector((state: RootStore) => state.pokemon);
-  console.log(pokemonState);
+  // const pokemonState = useSelector((state: RootStore) => state.pokemon);
+  // console.log(pokemonState);
   return (
-    <div className="App">
-      <SearchForm />
-      <PokemonDetails pokemonState={pokemonState} />
-    </div>
+    <BrowserRouter basename="/pockemon-react-typescript">
+      <div className="App">
+        <Switch>
+          <Route path="/:name" component={PokemonDetails} />
+          <Route path="/" component={PokemonList} />
+        </Switch>
+      </div>
+    </BrowserRouter>
   );
 };
 

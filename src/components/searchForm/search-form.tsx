@@ -1,28 +1,30 @@
 import React, { FormEvent, useRef } from "react";
-import { getPockemonByName } from "../../redux/actions/pokemon.action";
-import { useDispatch } from "react-redux";
+import { withRouter, useHistory } from "react-router-dom";
+import CustomButton from "./customButton/custom-button";
+import { Form, Title, Input } from "./search-form.styles";
 
 const SearchForm: React.FC = () => {
-  const dispatch = useDispatch();
   const refInput = useRef<HTMLInputElement>(null);
+  const history = useHistory();
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const pokemonName: string = refInput.current!.value.trim();
+    refInput.current!.value = "";
     if (pokemonName) {
-      dispatch(getPockemonByName(pokemonName));
+      history.push(`/${pokemonName}`);
     }
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="find_pokemon">Find your pokemon:</label>
-      <input
+    <Form onSubmit={handleSubmit}>
+      <Title>Find your pokemon:</Title>
+      <Input
         type="text"
         id="find_pokemon"
         ref={refInput}
         placeholder="Pokemon name"
       />
-      <button type="submit">Search</button>
-    </form>
+      <CustomButton btnType="submit" value="Search" />
+    </Form>
   );
 };
-export default SearchForm;
+export default React.memo(withRouter(SearchForm));

@@ -11,16 +11,13 @@ type PokemonSprites = {
   front_default: string;
   back_default: string;
 };
-type PokemonSpecies = {
-    name: string;
-  };
 
 export type Pokemon = {
   name: string;
   abilities: PokemonAbility[];
   sprites: PokemonSprites;
-  species: PokemonSpecies;
 };
+
 interface PokemonFetchingStart {
   type: typeof POKEMON_FETCHING_START;
 }
