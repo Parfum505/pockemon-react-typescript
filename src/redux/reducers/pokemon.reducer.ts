@@ -6,7 +6,7 @@ import {
   POKEMON_FETCHING_SUCCESS,
 } from "../actionTypes/pokemon.action.type";
 
-interface PokemontStateI {
+export interface PokemontStateI {
   loading: boolean;
   pokemon?: Pokemon;
   error: string;

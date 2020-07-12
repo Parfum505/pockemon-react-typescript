@@ -5,24 +5,21 @@ export const POKEMON_FETCHING_ERROR = "POKEMON_FETCHING_ERROR";
 type PokemonAbility = {
   ability: {
     name: string;
-    url: string;
   };
 };
 type PokemonSprites = {
   front_default: string;
   back_default: string;
 };
-type PokemonStat = {
-  base_stat: number;
-  stat: {
+type PokemonSpecies = {
     name: string;
   };
-};
 
 export type Pokemon = {
+  name: string;
   abilities: PokemonAbility[];
   sprites: PokemonSprites;
-  stats: PokemonStat[];
+  species: PokemonSpecies;
 };
 interface PokemonFetchingStart {
   type: typeof POKEMON_FETCHING_START;
