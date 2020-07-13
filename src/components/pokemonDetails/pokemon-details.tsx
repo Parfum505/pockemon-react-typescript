@@ -36,14 +36,19 @@ const PokemonDetails: React.FC = () => {
           : pokemonState.pokemon && (
               <PokemonCard>
                 <h2>Name: {pokemonState.pokemon.name}</h2>
-                <img
-                  src={pokemonState.pokemon.sprites.front_default}
-                  alt="icon"
-                />
-                <img
-                  src={pokemonState.pokemon.sprites.back_default}
-                  alt="icon"
-                />
+                {pokemonState.pokemon.sprites.front_default && (
+                  <img
+                    src={pokemonState.pokemon.sprites.front_default}
+                    alt="icon"
+                  />
+                )}
+
+                {pokemonState.pokemon.sprites.back_default && (
+                  <img
+                    src={pokemonState.pokemon.sprites.back_default}
+                    alt="icon"
+                  />
+                )}
                 <h3>Abilities:</h3>
                 <ul>
                   {pokemonState.pokemon.abilities.map((item, idx) => (

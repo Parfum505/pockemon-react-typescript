@@ -1,6 +1,7 @@
 export const POKEMON_FETCHING_START = "POKEMON_FETCHING_START";
 export const POKEMON_FETCHING_SUCCESS = "POKEMON_FETCHING_SUCCESS";
-export const ALL_POKEMONS_FETCHING_SUCCESS = "ALL_POKEMONS_FETCHING_SUCCESS";
+export const ALL_POKEMONS_NAMES_FETCHING_SUCCESS =
+  "ALL_POKEMONS_NAMES_FETCHING_SUCCESS";
 export const POKEMON_FETCHING_ERROR = "POKEMON_FETCHING_ERROR";
 
 type PokemonAbility = {
@@ -11,9 +12,6 @@ type PokemonAbility = {
 type PokemonSprites = {
   front_default: string;
   back_default: string;
-};
-export type PokemonName = {
-  name: string;
 };
 
 export type Pokemon = {
@@ -30,9 +28,9 @@ interface PokemonFetchingSuccess {
   type: typeof POKEMON_FETCHING_SUCCESS;
   payload: Pokemon;
 }
-interface AllPokemonsFetchingSuccess {
-  type: typeof ALL_POKEMONS_FETCHING_SUCCESS;
-  payload: PokemonName[];
+interface AllPokemonsNamesFetchingSuccess {
+  type: typeof ALL_POKEMONS_NAMES_FETCHING_SUCCESS;
+  payload: string[];
 }
 interface PokemonFetchingError {
   type: typeof POKEMON_FETCHING_ERROR;
@@ -43,7 +41,5 @@ export type PokemonDispatchType =
   | PokemonFetchingStart
   | PokemonFetchingSuccess
   | PokemonFetchingError;
-export type AllPokemonsDispatchType =
-  | PokemonFetchingStart
-  | AllPokemonsFetchingSuccess
-  | PokemonFetchingError;
+
+export type AllPokemonsNamesDispatchType = AllPokemonsNamesFetchingSuccess;
