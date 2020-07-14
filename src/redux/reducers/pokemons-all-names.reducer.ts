@@ -10,7 +10,7 @@ const defaultState: PokemonsAllStateI = {
   pokemons: [],
 };
 
-const pokemonsAllReducer = (
+const pokemonsAllNamesReducer = (
   state: PokemonsAllStateI = defaultState,
   action: AllPokemonsNamesDispatchType
 ): PokemonsAllStateI => {
@@ -22,4 +22,4 @@ const pokemonsAllReducer = (
   }
 };
 
-export default pokemonsAllReducer;
+export default pokemonsAllNamesReducer;

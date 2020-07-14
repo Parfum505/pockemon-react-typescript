@@ -10,14 +10,14 @@ import { getAllPockemonsNames } from "../../redux/actions/pokemons-all-names.act
 const SearchForm: React.FC = () => {
   const [userInput, setUserInput] = useState<string>("");
   const dispatch = useDispatch();
-  const pokemonsAllState = useSelector((state: RootStore) => state.pokemonsAll);
-  const pokemonsList = pokemonsAllState.pokemons;
+  const pokemonsAllState = useSelector((state: RootStore) => state.pokemonsAllNames);
+  const pokemonsNames = pokemonsAllState.pokemons;
 
   useEffect(() => {
-    if (!pokemonsList?.length) {
+    if (!pokemonsNames?.length) {
       dispatch(getAllPockemonsNames());
     }
-  }, [dispatch, pokemonsList]);
+  }, [dispatch, pokemonsNames]);
 
   const history = useHistory();
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -33,7 +33,7 @@ const SearchForm: React.FC = () => {
     <Form onSubmit={handleSubmit}>
       <Title>Find your pokemon:</Title>
       <AutoComplete
-        suggestions={pokemonsList}
+        suggestions={pokemonsNames}
         inputValue={userInput}
         setInputValue={setUserInput}
       />
