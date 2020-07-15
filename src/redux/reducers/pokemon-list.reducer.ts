@@ -2,21 +2,22 @@ import {
   PokemonListItem,
   PaginationUrls,
   PokemonListDispatchType,
-  POKEMON_FETCHING_START,
-  POKEMON_FETCHING_ERROR,
+  POKEMON_LIST_FETCHING_START,
+  POKEMON_LIST_FETCHING_ERROR,
   POKEMON_LIST_FETCHING_SUCCESS,
   POKEMON_LIST_SET_URL,
-} from "../actionTypes/pokemon.action.type";
+} from "../actionTypes/pokemon-list.action.type";
 
 export interface PokemonsListStateI {
   loading: boolean;
-  pokemons?: PokemonListItem[];
+  pokemons: PokemonListItem[];
   error: string;
   urls: PaginationUrls;
 }
 const defaultState: PokemonsListStateI = {
   loading: false,
   error: "",
+  pokemons: [],
   urls: {
     next: null,
     previous: null,
@@ -33,9 +34,9 @@ const pokemonsListReducer = (
       const newUrls = { ...state.urls, current: action.payload };
       return { ...state, urls: newUrls };
     }
-    case POKEMON_FETCHING_START:
+    case POKEMON_LIST_FETCHING_START:
       return { ...state, loading: true, error: "" };
-    case POKEMON_FETCHING_ERROR:
+    case POKEMON_LIST_FETCHING_ERROR:
       return { ...state, loading: false, error: action.payload };
     case POKEMON_LIST_FETCHING_SUCCESS:
       return {
@@ -43,7 +44,7 @@ const pokemonsListReducer = (
         pokemons: action.payload.pokemons,
         urls: action.payload.urls,
         loading: false,
-        error: ""
+        error: "",
       };
     default:
       return state;

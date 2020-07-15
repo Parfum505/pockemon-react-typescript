@@ -6,7 +6,15 @@ export const Button = styled.input`
   border: 1px solid #ddd;
   color: white;
   cursor: pointer;
+  &:active,
+  &:focus {
+    outline: none;
+  }
   &:hover {
     background-color: royalblue;
+  }
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
   }
 `;

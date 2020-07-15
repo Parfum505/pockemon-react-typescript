@@ -3,11 +3,11 @@ import axios from "axios";
 import {
   PokemonListDispatchType,
   PokemonListSetUrls,
-  POKEMON_FETCHING_START,
-  POKEMON_FETCHING_ERROR,
+  POKEMON_LIST_FETCHING_START,
+  POKEMON_LIST_FETCHING_ERROR,
   POKEMON_LIST_FETCHING_SUCCESS,
   POKEMON_LIST_SET_URL,
-} from "../actionTypes/pokemon.action.type";
+} from "../actionTypes/pokemon-list.action.type";
 
 export const setCurrentUrl = (url: string): PokemonListSetUrls => {
   return { type: POKEMON_LIST_SET_URL, payload: url };
@@ -16,7 +16,7 @@ export const getPockemonsList = (url: string) => async (
   dispatch: Dispatch<PokemonListDispatchType>
 ) => {
   try {
-    dispatch({ type: POKEMON_FETCHING_START });
+    dispatch({ type: POKEMON_LIST_FETCHING_START });
     const res = await axios.get(url);
     const urls = {
       next: res.data.next,
@@ -35,6 +35,6 @@ export const getPockemonsList = (url: string) => async (
       payload: { urls, pokemons },
     });
   } catch (error) {
-    dispatch({ type: POKEMON_FETCHING_ERROR, payload: error.message });
+    dispatch({ type: POKEMON_LIST_FETCHING_ERROR, payload: error.message });
   }
 };

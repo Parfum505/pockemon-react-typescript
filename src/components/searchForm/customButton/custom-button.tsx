@@ -3,6 +3,7 @@ import { Button } from "./custom-button.styles";
 interface ICustomButtonProps {
   value: string;
   btnType: "button" | "submit" | "reset";
+  isDisabled?: boolean;
   clickHandler?: () => void;
   addClasses?: string[];
 }
@@ -11,6 +12,7 @@ const CustomButton: React.FC<ICustomButtonProps> = ({
   addClasses,
   btnType,
   clickHandler,
+  isDisabled,
 }) => {
   let allClasses = ["btn"];
   if (addClasses?.length) {
@@ -21,6 +23,7 @@ const CustomButton: React.FC<ICustomButtonProps> = ({
       className={allClasses.join(" ")}
       type={btnType}
       onClick={clickHandler}
+      disabled={isDisabled}
       value={value}
     />
   );
