@@ -1,26 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SearchForm from "../searchForm/search-form";
 import CustomButton from "../searchForm/customButton/custom-button";
 import { useDispatch, useSelector } from "react-redux";
 import { RootStore } from "../../redux/store/store";
-import {
-  getPockemonsList,
-  setCurrentUrl,
-} from "../../redux/actions/pokemon-list.action";
+import { getPockemonsList } from "../../redux/actions/pokemon-list.action";
 import { PaginationContainer, List, ListItem } from "./pokemon-list.styles";
 
 const defaultUrl = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20";
 
 const PokemonList: React.FC = () => {
+  const [currentUrl, setCurrentUrl] = useState<string>(null!);
   const dispatch = useDispatch();
   const pokemonsList = useSelector((state: RootStore) => state.pokemonsList);
   const pokemons = pokemonsList.pokemons;
-  const currentUrl = pokemonsList.urls.current;
 
   useEffect(() => {
-    dispatch(setCurrentUrl(defaultUrl));
-  }, [dispatch]);
+    if (!pokemons.length) {
+      setCurrentUrl(defaultUrl);
+    }
+  }, [pokemons]);
 
   useEffect(() => {
     dispatch(getPockemonsList(currentUrl));
@@ -31,7 +30,7 @@ const PokemonList: React.FC = () => {
   // };
   const onClickPagination = (url: string | null) => {
     if (url) {
-      dispatch(setCurrentUrl(url));
+      setCurrentUrl(url);
     }
   };
   return (
