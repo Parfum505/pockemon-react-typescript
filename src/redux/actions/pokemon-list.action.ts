@@ -2,15 +2,15 @@ import { Dispatch } from "redux";
 import axios from "axios";
 import {
   PokemonListDispatchType,
-  PokemonListSetUrls,
+  PokemonListSetLimit,
   POKEMON_LIST_FETCHING_START,
   POKEMON_LIST_FETCHING_ERROR,
   POKEMON_LIST_FETCHING_SUCCESS,
-  POKEMON_LIST_SET_URL,
+  POKEMON_LIST_SET_LIMIT,
 } from "../actionTypes/pokemon-list.action.type";
 
-export const setCurrentUrl = (url: string): PokemonListSetUrls => {
-  return { type: POKEMON_LIST_SET_URL, payload: url };
+export const setLimit = (num: number): PokemonListSetLimit => {
+  return { type: POKEMON_LIST_SET_LIMIT, payload: num };
 };
 export const getPockemonsList = (url: string) => async (
   dispatch: Dispatch<PokemonListDispatchType>
@@ -21,7 +21,6 @@ export const getPockemonsList = (url: string) => async (
     const urls = {
       next: res.data.next,
       previous: res.data.previous,
-      current: url,
     };
     const pokemons = res.data.results.map(
       (item: { name: string; url: string }) => {

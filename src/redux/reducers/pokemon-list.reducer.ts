@@ -5,7 +5,7 @@ import {
   POKEMON_LIST_FETCHING_START,
   POKEMON_LIST_FETCHING_ERROR,
   POKEMON_LIST_FETCHING_SUCCESS,
-  POKEMON_LIST_SET_URL,
+  POKEMON_LIST_SET_LIMIT,
 } from "../actionTypes/pokemon-list.action.type";
 
 export interface PokemonsListStateI {
@@ -13,6 +13,7 @@ export interface PokemonsListStateI {
   pokemons: PokemonListItem[];
   error: string;
   urls: PaginationUrls;
+  limit: number;
 }
 const defaultState: PokemonsListStateI = {
   loading: false,
@@ -21,8 +22,8 @@ const defaultState: PokemonsListStateI = {
   urls: {
     next: null,
     previous: null,
-    current: "",
   },
+  limit: 20,
 };
 
 const pokemonsListReducer = (
@@ -30,9 +31,8 @@ const pokemonsListReducer = (
   action: PokemonListDispatchType
 ): PokemonsListStateI => {
   switch (action.type) {
-    case POKEMON_LIST_SET_URL: {
-      const newUrls = { ...state.urls, current: action.payload };
-      return { ...state, urls: newUrls };
+    case POKEMON_LIST_SET_LIMIT: {
+      return { ...state, limit: action.payload };
     }
     case POKEMON_LIST_FETCHING_START:
       return { ...state, loading: true, error: "" };

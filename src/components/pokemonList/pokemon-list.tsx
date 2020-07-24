@@ -7,37 +7,41 @@ import { RootStore } from "../../redux/store/store";
 import { getPockemonsList } from "../../redux/actions/pokemon-list.action";
 import { PaginationContainer, List, ListItem } from "./pokemon-list.styles";
 
-const defaultUrl = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20";
-
 const PokemonList: React.FC = () => {
   const [currentUrl, setCurrentUrl] = useState<string>(null!);
   const dispatch = useDispatch();
   const pokemonsList = useSelector((state: RootStore) => state.pokemonsList);
   const pokemons = pokemonsList.pokemons;
+  const defaultUrl =
+    "https://pokeapi.co/api/v2/pokemon?offset=0&limit=" + pokemonsList.limit;
 
   useEffect(() => {
     if (!pokemons.length) {
       setCurrentUrl(defaultUrl);
     }
-  }, [pokemons]);
+  }, [pokemons.length, defaultUrl]);
 
   useEffect(() => {
     dispatch(getPockemonsList(currentUrl));
   }, [dispatch, currentUrl]);
 
-  // const loadFirstPage = () => {
-  //   dispatch(setCurrentUrl(defaultUrl));
-  // };
-  const onClickPagination = (url: string | null) => {
+  const onClickPagination = (url: string | null): void => {
     if (url) {
       setCurrentUrl(url);
     }
   };
+
   return (
     <>
       <SearchForm />
       <PaginationContainer>
         <p>See all pokemons</p>
+        <CustomButton
+          isDisabled={!pokemonsList.urls.previous || pokemonsList.loading}
+          btnType="button"
+          value="First Page"
+          clickHandler={() => onClickPagination(defaultUrl)}
+        />
         <CustomButton
           isDisabled={!pokemonsList.urls.previous || pokemonsList.loading}
           btnType="button"

@@ -4,10 +4,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import PokemonDetails from "./components/pokemonDetails/pokemon-details";
 import PokemonList from "./components/pokemonList/pokemon-list";
 
-const App: React.FC = () => {
-  // const pokemonState = useSelector((state: RootStore) => state.pokemon);
-  // console.log(pokemonState);
-  return (
+const App: React.FC = () => (
     <BrowserRouter basename="/pockemon-react-typescript">
       <div className="App">
         <Switch>
@@ -17,6 +14,5 @@ const App: React.FC = () => {
       </div>
     </BrowserRouter>
   );
-};
 
 export default App;
