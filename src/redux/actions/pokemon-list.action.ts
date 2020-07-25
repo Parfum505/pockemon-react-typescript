@@ -8,6 +8,7 @@ import {
   POKEMON_LIST_FETCHING_SUCCESS,
   POKEMON_LIST_SET_LIMIT,
 } from "../actionTypes/pokemon-list.action.type";
+import { getLastPage, getCurrentPage } from "../../utils/pagination";
 
 export const setLimit = (num: number): PokemonListSetLimit => {
   return { type: POKEMON_LIST_SET_LIMIT, payload: num };
@@ -29,9 +30,16 @@ export const getPockemonsList = (url: string) => async (
         return { name: item.name, id };
       }
     );
+    const lastPage = getLastPage(url, res.data.count);
+    const currentPage = getCurrentPage(url);
     dispatch({
       type: POKEMON_LIST_FETCHING_SUCCESS,
-      payload: { urls, pokemons },
+      payload: {
+        urls,
+        pokemons,
+        currentPage,
+        lastPage,
+      },
     });
   } catch (error) {
     dispatch({ type: POKEMON_LIST_FETCHING_ERROR, payload: error.message });

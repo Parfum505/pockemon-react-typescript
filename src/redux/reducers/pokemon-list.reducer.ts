@@ -14,6 +14,8 @@ export interface PokemonsListStateI {
   error: string;
   urls: PaginationUrls;
   limit: number;
+  currentPage: number;
+  lastPage: number;
 }
 const defaultState: PokemonsListStateI = {
   loading: false,
@@ -24,6 +26,8 @@ const defaultState: PokemonsListStateI = {
     previous: null,
   },
   limit: 20,
+  currentPage: 1,
+  lastPage: 1
 };
 
 const pokemonsListReducer = (
@@ -41,10 +45,9 @@ const pokemonsListReducer = (
     case POKEMON_LIST_FETCHING_SUCCESS:
       return {
         ...state,
-        pokemons: action.payload.pokemons,
-        urls: action.payload.urls,
         loading: false,
         error: "",
+        ...action.payload
       };
     default:
       return state;

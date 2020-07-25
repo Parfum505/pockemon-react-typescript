@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import SearchForm from "../searchForm/search-form";
-import CustomButton from "../searchForm/customButton/custom-button";
 import { useDispatch, useSelector } from "react-redux";
 import { RootStore } from "../../redux/store/store";
 import { getPockemonsList } from "../../redux/actions/pokemon-list.action";
-import { PaginationContainer, List, ListItem } from "./pokemon-list.styles";
+import { List, ListItem } from "./pokemon-list.styles";
+import Pagination from "../pagination/pagination";
+import { BASE_URL } from "../../data/baseUrl";
 
 const PokemonList: React.FC = () => {
   const [currentUrl, setCurrentUrl] = useState<string>(null!);
   const dispatch = useDispatch();
   const pokemonsList = useSelector((state: RootStore) => state.pokemonsList);
   const pokemons = pokemonsList.pokemons;
-  const defaultUrl =
-    "https://pokeapi.co/api/v2/pokemon?offset=0&limit=" + pokemonsList.limit;
+  const defaultUrl = BASE_URL + pokemonsList.limit;
 
   useEffect(() => {
     if (!pokemons.length) {
@@ -25,37 +25,16 @@ const PokemonList: React.FC = () => {
     dispatch(getPockemonsList(currentUrl));
   }, [dispatch, currentUrl]);
 
-  const onClickPagination = (url: string | null): void => {
+  const onClickPagination = useCallback((url: string | null): void => {
     if (url) {
       setCurrentUrl(url);
     }
-  };
+  }, []);
 
   return (
     <>
       <SearchForm />
-      <PaginationContainer>
-        <p>See all pokemons</p>
-        <CustomButton
-          isDisabled={!pokemonsList.urls.previous || pokemonsList.loading}
-          btnType="button"
-          value="First Page"
-          clickHandler={() => onClickPagination(defaultUrl)}
-        />
-        <CustomButton
-          isDisabled={!pokemonsList.urls.previous || pokemonsList.loading}
-          btnType="button"
-          value="Prev"
-          clickHandler={() => onClickPagination(pokemonsList.urls.previous)}
-        />
-        <CustomButton
-          isDisabled={!pokemonsList.urls.next || pokemonsList.loading}
-          btnType="button"
-          value="Next"
-          clickHandler={() => onClickPagination(pokemonsList.urls.next)}
-        />
-      </PaginationContainer>
-
+      <Pagination onClickHandler={onClickPagination} />
       <List>
         {pokemons &&
           pokemons.map((item) => (
