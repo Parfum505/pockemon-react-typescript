@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { Link } from "react-router-dom";
 import SearchForm from "../searchForm/search-form";
 import { useDispatch, useSelector } from "react-redux";
 import { RootStore } from "../../redux/store/store";
 import { getPockemonsList } from "../../redux/actions/pokemon-list.action";
-import { List, ListItem } from "./pokemon-list.styles";
+import { List } from "./pokemon-list.styles";
+import PokemonItem from "./pokemonListItem/pokemon-list-item";
 import Pagination from "../pagination/pagination";
 import { BASE_URL } from "../../data/baseUrl";
 
@@ -37,17 +37,7 @@ const PokemonList: React.FC = () => {
       <Pagination onClickHandler={onClickPagination} />
       <List>
         {pokemons &&
-          pokemons.map((item) => (
-            <ListItem key={item.id}>
-              <Link to={`/${item.name}`}>
-                <h4>{item.name}</h4>
-                <img
-                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${item.id}.png`}
-                  alt="icon"
-                />
-              </Link>
-            </ListItem>
-          ))}
+          pokemons.map((item) => <PokemonItem key={item.id} item={item} />)}
       </List>
     </>
   );
