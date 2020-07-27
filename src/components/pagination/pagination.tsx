@@ -1,18 +1,27 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useCallback } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { RootStore } from "../../redux/store/store";
 import CustomButton from "../searchForm/customButton/custom-button";
 import { PaginationContainer } from "./pagination.styles";
 import { BASE_URL } from "../../data/baseUrl";
+import LimitPerPage from "../limitPerPage/limit-per-page";
+import { setLimit } from "../../redux/actions/pokemon-list.action";
 
 interface IPagination {
   onClickHandler: (url: string | null) => void;
 }
 
 const Pagination: React.FC<IPagination> = ({ onClickHandler }) => {
+  const dispatch = useDispatch();
   const pokemonsList = useSelector((state: RootStore) => state.pokemonsList);
   const defaultUrl = BASE_URL + pokemonsList.limit;
-
+  const setLimitPerPage = useCallback(
+    (newLimit) => {
+      dispatch(setLimit(newLimit));
+      onClickHandler(BASE_URL + newLimit);
+    },
+    [onClickHandler, dispatch]
+  );
   return (
     <PaginationContainer>
       <p>{`See all pokemons: Page ${pokemonsList.currentPage} of ${pokemonsList.lastPage}`}</p>
@@ -34,6 +43,7 @@ const Pagination: React.FC<IPagination> = ({ onClickHandler }) => {
         value="Next"
         clickHandler={() => onClickHandler(pokemonsList.urls.next)}
       />
+      <LimitPerPage limit={pokemonsList.limit} setNewLimit={setLimitPerPage} />
     </PaginationContainer>
   );
 };
