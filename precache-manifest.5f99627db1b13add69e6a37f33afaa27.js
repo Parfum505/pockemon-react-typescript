@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "20fc33182f387deedc3266b68fb02857",
+    "revision": "eec0688f6c5264e8731a8d0a88a0c04e",
     "url": "/pockemon-react-typescript/index.html"
   },
   {
-    "revision": "dabf7d8497deab88312d",
+    "revision": "d0fb0afc3a864036825d",
     "url": "/pockemon-react-typescript/static/css/main.71a6f041.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/pockemon-react-typescript/static/js/2.79f61ecc.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "dabf7d8497deab88312d",
-    "url": "/pockemon-react-typescript/static/js/main.69d8f927.chunk.js"
+    "revision": "d0fb0afc3a864036825d",
+    "url": "/pockemon-react-typescript/static/js/main.c27a5331.chunk.js"
   },
   {
     "revision": "bd47a37b48bc9ff41c8b",
