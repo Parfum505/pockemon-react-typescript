@@ -1,4 +1,5 @@
 import React, { ChangeEvent } from "react";
+import { Container } from "./limit-per-page.styles";
 
 const optionsVal = [20, 40, 60, 80, 100];
 
@@ -7,7 +8,8 @@ interface ILimitPerPage {
   setNewLimit: (num: number) => void;
 }
 const LimitPerPage: React.FC<ILimitPerPage> = ({ limit, setNewLimit }) => (
-  <div>
+  <Container>
+    <span>Limit per page</span>
     <select
       value={limit}
       onChange={(e: ChangeEvent<HTMLSelectElement>): void => {
@@ -20,7 +22,7 @@ const LimitPerPage: React.FC<ILimitPerPage> = ({ limit, setNewLimit }) => (
         </option>
       ))}
     </select>
-  </div>
+  </Container>
 );
 
 export default LimitPerPage;
