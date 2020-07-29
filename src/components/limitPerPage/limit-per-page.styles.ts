@@ -6,6 +6,6 @@ export const Container = styled.div`
     padding: 0 10px;
   }
   select {
-    padding: 10px 5px;
+    padding: 9px 5px;
   }
 `;
