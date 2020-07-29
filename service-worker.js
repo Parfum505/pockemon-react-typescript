@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/pockemon-react-typescript/precache-manifest.5f99627db1b13add69e6a37f33afaa27.js"
+  "/pockemon-react-typescript/precache-manifest.c3b050d656a0fe4ec2ccc1d4afa90b36.js"
 );
 
 self.addEventListener('message', (event) => {
